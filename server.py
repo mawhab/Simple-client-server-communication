@@ -4,15 +4,15 @@ import socketserver
 class TCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip().decode('utf-8')
-        if self.data[0] == 'A':
+        if self.data[0] == 'A' or self.data[0] == 'a':
             s = ''.join(sorted(self.data[1:]))
-        elif self.data[0] == 'D':
+        elif self.data[0] == 'D' or self.data[0] == 'd':
             s = ''.join(sorted(self.data[1:]))[::-1]
-        elif self.data[0] == 'C':
+        elif self.data[0] == 'C' or self.data[0] == 'c':
             s = self.data[1:].upper()
         else:
             s = self.data
-        print(s)
+        # print(s)
         self.request.sendall(bytes(s, 'utf-8'))
     
 
